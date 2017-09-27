@@ -70,7 +70,7 @@ def ReadCliloc(infile, extension):
         number = struct.unpack("<L", buf)          # message ID
         delim  = fin.read(1)                       # delimiter
         length = struct.unpack("<H", fin.read(2))  # message length
-        if length > 0:
+        if length[0] > 0:
             text = fin.read(length[0])             # message text
         else:
             text = ''
