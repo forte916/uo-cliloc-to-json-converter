@@ -60,26 +60,26 @@ def ReadCliloc(infile, extension):
     except IOError as e:
         print('%s: %s' % (type(e).__name__, str(e)), file=sys.stderr)
         return
+    try:
+        fin.seek(6) # header, 6 bytes
+        while True:
+            buf = fin.read(4)
+            if buf == "":
+                break
 
-    fin.seek(6) # header, 6 bytes
-    while True:
-        buf = fin.read(4)
-        if buf == "":
-            break
+            number = struct.unpack("<L", buf)          # message ID
+            delim  = fin.read(1)                       # delimiter
+            length = struct.unpack("<H", fin.read(2))  # message length
+            if length[0] > 0:
+                text = fin.read(length[0])             # message text
+            else:
+                text = ''
 
-        number = struct.unpack("<L", buf)          # message ID
-        delim  = fin.read(1)                       # delimiter
-        length = struct.unpack("<H", fin.read(2))  # message length
-        if length[0] > 0:
-            text = fin.read(length[0])             # message text
-        else:
-            text = ''
-
-        if not outdict.get(str(number[0])):
-            outdict[str(number[0])] = {}
-        outdict[str(number[0])][extension] = text
-
-    fin.close()
+            if not outdict.get(str(number[0])):
+                outdict[str(number[0])] = {}
+            outdict[str(number[0])][extension] = text
+    finally:
+        fin.close()
     print("OK!")
 
 
@@ -102,17 +102,17 @@ def ReadInputDir(entries):
             fout = open("json\Cliloc.json", "w+")
             json.dump(outdict, fout, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
             #json.dump(outdict, codecs.getwriter('utf-8')(fout), ensure_ascii=False, indent=4, sort_keys=True)
-            fout.close()
 
             #with io.open("json\Cliloc_utf8.json", "w+", encoding='utf-8') as fout2:
             #    fout2.write(json.dumps(outdict, ensure_ascii=False, indent=4, sort_keys=True))
 
             print('Done! Cliloc.json has been saved in json folder. You can open and edit it using any text editor.')
-
         except Exception as e:
             print('%s: %s' % (type(e).__name__, str(e)), file=sys.stderr)
             print('Error! Cliloc.json could not be saved.')
             return
+        finally:
+            fout.close()
 
 
 #
