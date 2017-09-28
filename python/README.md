@@ -1,9 +1,7 @@
 # UO Cliloc to JSON Converter
 
-Python scritps to convert Ultima Online Cliloc files to JSON, back and forth, to create custom clilocs.
+Python scripts to convert Ultima Online Cliloc files to JSON, back and forth, to create custom clilocs.
 This scripts are ported from [original PHP](https://github.com/felladrin/uo-cliloc-to-json-converter) to Python.
-
-    Note: I don't even run origial PHP scripts, but these Python scripts takes very long time.
 
 ## Three simple steps to build your translated clilocs
 
@@ -47,3 +45,4 @@ Done! Now copy these clilocs to UO folder, overwriting the old ones.
 ## Requirements
 
 - python 2.6+
+

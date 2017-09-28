@@ -9,14 +9,13 @@ import json
 """
 Description:
     Convert multiple Cliloc files to a json file for easy to translate.
-    This python script takes a very long time.
 
 Input:
     Multiple Cliloc files stored in `input` folder.
     Then, run this script without argument.
 
     A example of folder tree.
-        +--cliloc2json.py
+        +--convert_cliloc_to_json.py
         +--input
         |    +--Cliloc.deu
         |    +--Cliloc.enu
@@ -25,7 +24,7 @@ Input:
         +--json
 
 Output:
-    A json file merged from all languages into `json` folder.
+    A json file merged with all languages output to `json` folder.
 
     A sample of output.
         {
