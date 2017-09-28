@@ -99,7 +99,7 @@ def ReadInputDir(entries):
     # `ensure_ascii=False` will assume utf-8
     if len(outdict) > 0:
         try:
-            fout = open("json\Cliloc.json", "w+")
+            fout = open(os.path.join('json', 'Cliloc.json'), "w+")
             json.dump(outdict, fout, ensure_ascii=False, indent=4, sort_keys=True, separators=(',', ': '))
             #json.dump(outdict, codecs.getwriter('utf-8')(fout), ensure_ascii=False, indent=4, sort_keys=True)
 
@@ -119,7 +119,8 @@ def ReadInputDir(entries):
 # main
 #
 if __name__ == '__main__':
-    entries = glob.glob('input\Cliloc.*')
+    entries = glob.glob(os.path.join('input', 'Cliloc.*'))
+    print(entries)
     if len(entries) < 1:
         usage()
 
