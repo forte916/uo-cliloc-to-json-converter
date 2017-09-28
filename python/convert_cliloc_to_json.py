@@ -64,14 +64,14 @@ def ReadCliloc(infile, extension):
         fin.seek(6) # header, 6 bytes
         while True:
             buf = fin.read(4)
-            if buf == "":
+            if len(buf) < 1:
                 break
 
             number = struct.unpack("<L", buf)          # message ID
             delim  = fin.read(1)                       # delimiter
             length = struct.unpack("<H", fin.read(2))  # message length
             if length[0] > 0:
-                text = fin.read(length[0])             # message text
+                text = str(fin.read(length[0]))        # message text
             else:
                 text = ''
 
